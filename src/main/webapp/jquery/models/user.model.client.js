@@ -27,7 +27,7 @@ function User(username, password, firstName, lastName,
     this.setDataOfBirth = setDataOfBirth;
     this.getDataOfBirth = getDataOfBirth;
 
-    self = this;
+    var self = this;
 
 
     function getUsername() {

@@ -39,7 +39,7 @@
     function renderUser(user) {
 
     }
-    
+
     function renderUsers(users) {
 
     }
