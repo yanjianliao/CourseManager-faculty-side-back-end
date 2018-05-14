@@ -10,6 +10,6 @@ function UserServiceClient() {
     var self = this;
     this.url = 'http://localhost:8080/api/user';
 
-    
+
 
 }
