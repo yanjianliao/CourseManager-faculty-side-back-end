@@ -16,6 +16,7 @@ function User(username, password, firstName, lastName,
     this.getPassword = getPassword;
     this.setFirstName = setFirstName;
     this.getFirstName = getFirstName;
+    this.getLastName = getLastName;
     this.setLastName = setLastName;
     this.getEmail = getEmail;
     this.setEmail = setEmail;
