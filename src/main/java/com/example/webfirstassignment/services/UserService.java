@@ -20,8 +20,8 @@ public class UserService {
 	UserRepository repository;
 	
 
-	
-	@GetMapping("/api/user/")
+	//both /api/user and /api/user/?username=... will work
+	@GetMapping("/api/user")
 	public List<User> findAllUsers(@RequestParam(name="username", required=false) String username) {
 		if(username != null) {
 			return (List<User>)repository.findUserByUsername(username);
@@ -36,6 +36,11 @@ public class UserService {
 			return data.get();
 		}
 		return null;
+	}
+	
+	@GetMapping("/api/find")
+	public List<User> findUserByUsername(@RequestParam(name="username", required=true) String username) {
+		return (List<User>)repository.findUserByUsername(username);
 	}
 	
 	@PostMapping("/api/register")
