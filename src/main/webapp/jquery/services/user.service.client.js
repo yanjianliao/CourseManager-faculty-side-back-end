@@ -8,7 +8,7 @@ function UserServiceClient() {
 
 
     var self = this;
-    this.url = 'http://localhost:8080/api/user';
+    this.url = 'https://first-yanjianliao.herokuapp.com/api/user';
 
     function updateUser(userId, newUser) {
         return fetch(self.url + '/' + userId, {
