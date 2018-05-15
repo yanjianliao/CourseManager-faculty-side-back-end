@@ -11,8 +11,8 @@
     function main() {
         $usernameFld = $('#usernameFld');
         $passwordFld = $('#passwordFld');
-        $removeBtn = $('#wbdv-remove');
-        $editBtn = $('#wbdv-edit');
+        $removeBtn = $('.wbdv-remove');
+        $editBtn = $('.wbdv-edit');
         $createBtn = $('.wbdv-create');
         $firstNameFld = $('#firstNameFld');
         $lastNameFld = $('#lastNameFld');
@@ -37,7 +37,7 @@
             firstName, lastName, 'default@default.com',
             '123456', role, '1990-01-01');
 
-        userService.createUser(newUser);
+        userService.createUser(newUser).then(renderUser);
     }
 
     function findAllUser() {
@@ -50,8 +50,13 @@
 
     }
 
-    function deleteUser() {
-
+    function deleteUser(event) {
+        var deleteBtn = $(event.currentTarget);
+        var id = deleteBtn.parent()
+            .parent()
+            .parent()
+            .attr('id');
+        userService.deleteUser(id).then(findAllUser);
     }
 
     function selectUser() {
@@ -63,15 +68,25 @@
     }
 
     function renderUser(user) {
-
+        var clone = $userRowTemplate.clone();
+        clone.find('.wbdv-username')
+            .html(user.username);
+        clone.find('.wbdv-first-name')
+            .html(user.firstName);
+        clone.find('.wbdv-last-name')
+            .html(user.lastName);
+        clone.find('.wbdv-role')
+            .html(user.role);
+        $tbody.append(clone);
     }
 
     function renderUsers(users) {
         $tbody.empty();
-        console.log(users);
         for(var i = 0; i < users.length; i++) {
             var user = users[i];
             var clone = $userRowTemplate.clone();
+            clone.attr('id', user.id);
+            clone.find('.wbdv-remove').click(deleteUser);
             clone.find('.wbdv-username')
                 .html(user.username);
             clone.find('.wbdv-first-name')
