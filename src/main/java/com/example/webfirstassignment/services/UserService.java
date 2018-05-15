@@ -1,5 +1,5 @@
 package com.example.webfirstassignment.services;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +22,15 @@ public class UserService {
 	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
 		return (List<User>) repository.findAll();
+	}
+	
+	@GetMapping("/api/user/{userId}")
+	public User findUserById(@PathVariable("userId") int id) {
+		Optional<User> data = repository.findById(id);
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
 	}
 	
 	@PostMapping("/api/user")
