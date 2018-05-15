@@ -6,11 +6,29 @@
     $(main);
 
     function main() {
+        $usernameFld = $('#usernameFld');
+        $passwordFld = $('#passwordFld');
+        $verifyPasswordFld = $('#verifyPasswordFld');
+        registerBtn = $('#registerBtn');
 
+        registerBtn.click(register);
     }
 
     function register() {
+        var username = $usernameFld.val();
+        var password = $passwordFld.val();
 
+        var newUser = new User(username, password,
+            'firstName', 'lastName', 'default@default.com',
+            '123456', 'role', '1990-01-01');
+
+        userService.register(newUser).then(printOut);
+    }
+
+    function printOut(users){
+        console.log(users.length);
+        console.log(users);
+        console.log(users[0]);
     }
 
 })();

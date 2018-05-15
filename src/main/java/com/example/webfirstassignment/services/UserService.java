@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webfirstassignment.models.User;
@@ -20,8 +21,11 @@ public class UserService {
 	
 
 	
-	@GetMapping("/api/user")
-	public List<User> findAllUsers() {
+	@GetMapping("/api/user/")
+	public List<User> findAllUsers(@RequestParam(name="username", required=false) String username) {
+		if(username != null) {
+			return (List<User>)repository.findUserByUsername(username);
+		}
 		return (List<User>) repository.findAll();
 	}
 	
@@ -33,6 +37,14 @@ public class UserService {
 		}
 		return null;
 	}
+	
+	@PostMapping("/api/register")
+	public List<User> register(@RequestBody User user) {
+		String username = user.getUsername();
+		List<User> foundUser = (List<User>)repository.findUserByUsername(username);
+		return foundUser;
+	}	
+	
 	
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int id, @RequestBody User user) {

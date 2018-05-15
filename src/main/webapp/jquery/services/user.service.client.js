@@ -9,9 +9,19 @@ function UserServiceClient() {
 
     var self = this;
     this.url = 'http://localhost:8080/api/user';
+    this.registerUrl = 'http://localhost:8080/api/register';
 
-    function register() {
-        
+
+    function register(user) {
+        return fetch(self.registerUrl, {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        });
     }
 
 
