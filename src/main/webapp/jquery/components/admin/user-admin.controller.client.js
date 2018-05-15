@@ -84,6 +84,7 @@
             currentUser.phone, role,
             currentUser.dateOfBirth);
 
+        userService.updateUser(currentId, newUser).then(findAllUser);
 
     }
 

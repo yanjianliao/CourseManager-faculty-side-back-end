@@ -11,7 +11,13 @@ function UserServiceClient() {
     this.url = 'http://localhost:8080/api/user';
 
     function updateUser(userId, newUser) {
-
+        return fetch(self.url + '/' + userId, {
+            method: 'put',
+            body: JSON.stringify(newUser),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        });
     }
 
     function findUserById(userId) {
