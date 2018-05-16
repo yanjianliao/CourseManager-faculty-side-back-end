@@ -12,10 +12,10 @@ function UserServiceClient() {
     this.logout = logout;
 
     var self = this;
-    this.url = 'https://first-yanjianliao.herokuapp.com/api/user';
-    this.loginUrl = 'https://first-yanjianliao.herokuapp.com/api/login';
-    this.registerUrl = 'https://first-yanjianliao.herokuapp.com/api/register';
-    this.profileUrl = 'https://first-yanjianliao.herokuapp.com/api/profile';
+    this.url = 'http://localhost:8080/api/user';
+    this.loginUrl = 'http://localhost:8080/api/login';
+    this.registerUrl = 'http://localhost:8080/api/register';
+    this.profileUrl = 'http://localhost:8080/api/profile';
 
 
     function logout() {
@@ -23,8 +23,16 @@ function UserServiceClient() {
     }
 
 
-    function updateProfile() {
-        return fetch(self.profileUrl)
+    function updateProfile(user) {
+        return fetch(self.profileUrl, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        });
     }
 
 

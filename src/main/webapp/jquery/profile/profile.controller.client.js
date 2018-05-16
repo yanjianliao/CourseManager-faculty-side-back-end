@@ -4,6 +4,7 @@
     var $phone , $email, $role, $dateOfBirth, $username;
     var $updateBtn, $logoutBtn;
     var userService = new UserServiceClient();
+    var currentUser;
 
     $(main);
 
@@ -17,15 +18,26 @@
 
         $updateBtn = $('#updateBtn');
         $logoutBtn = $('#loginBtn');
-        $updateBtn.click(showProfile);
+        $updateBtn.click(updateProfile);
         $logoutBtn.click(logout);
-        document.cookie = '123';
         showProfile();
 
     }
 
     function updateProfile() {
+        //username, password, firstName, lastName,
+        // email, phone, role, dateOfBirth
+        var user = currentUser;
+        var newUser = new User(user.username, user.password,
+            user.firstName, user.lastName, $email.val(),
+            $phone.val(), $role.val(), $dateOfBirth.val().toString());
 
+        userService.updateProfile(newUser).then(afterUpdate);
+
+    }
+
+    function afterUpdate(user) {
+        console.log(user);
     }
 
     function logout() {
@@ -33,12 +45,12 @@
     }
 
     function showProfile() {
-        console.log(document.cookie);
         userService.profile().then(renderUser);
     }
 
     function renderUser(user) {
         console.log(user);
+        currentUser = user;
         if(user.phone !== '') {
             $phone.val(user.phone);
         }
@@ -53,6 +65,10 @@
 
         if(user.username !== ''){
             $username.val(user.username);
+        }
+
+        if(user.dateOfBirth != null) {
+            $dateOfBirth.val(user.dateOfBirth);
         }
 
     }

@@ -21,7 +21,6 @@ public class UserService {
 	@Autowired
 	UserRepository repository;
 
-	User temp = null;
 	
 	
 	//both /api/user and /api/user/?username=... will work
@@ -50,9 +49,7 @@ public class UserService {
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-//		System.out.println("profile : " + (user == null) + " session id: " + session.getId());
-//		user = temp;
-//		System.out.println(user.getId());
+		System.out.println("profile : " + (user == null));
 		return user;
 	}
 		
@@ -65,9 +62,8 @@ public class UserService {
 			return user;
 		User currentUser = foundUser.get(0);
 		session.setAttribute("user", currentUser);
-		temp = currentUser;
-//		User u = (User) session.getAttribute("user");
-		System.out.println("login : " + temp.getId() + " session id: " + session.getId());
+
+
 		return currentUser;
 	}
 	
@@ -86,6 +82,18 @@ public class UserService {
 		repository.save(user);
 		return user;
 	}	
+	
+//	@PutMapping("/api/profile")
+//	public User updateProfile(@RequestBody User user, HttpSession session) {
+//		if(temp != null) {
+//			user.setId(temp.getId());
+//			System.out.println(user.getDataOfBirth());
+//			repository.save(user);
+//			return user;
+//		}else {
+//			return null;
+//		}
+//	}
 	
 	
 	@PutMapping("/api/user/{userId}")
