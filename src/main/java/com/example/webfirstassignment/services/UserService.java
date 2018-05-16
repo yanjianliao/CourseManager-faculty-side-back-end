@@ -50,9 +50,9 @@ public class UserService {
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		System.out.println("profile : " + (user == null) + " session id: " + session.getId());
-		user = temp;
-		System.out.println(user.getId());
+//		System.out.println("profile : " + (user == null) + " session id: " + session.getId());
+//		user = temp;
+//		System.out.println(user.getId());
 		return user;
 	}
 		
