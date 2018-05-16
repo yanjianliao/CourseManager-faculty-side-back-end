@@ -21,6 +21,7 @@
             return;
         }
 
+
         if(password === ''){
             alert('Empty password!')
             return;
@@ -36,9 +37,11 @@
     function afterLogin(user) {
         if(user.role === 'role'){
             alert('Invalid username or password!');
+            return;
         }
 
-        console.log(user);
+        window.location.href = "http://localhost:8080/jquery/profile/profile.template.client.html";
+
     }
 
 })();

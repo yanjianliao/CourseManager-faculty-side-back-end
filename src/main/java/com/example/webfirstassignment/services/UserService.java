@@ -50,7 +50,6 @@ public class UserService {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		List<User> foundUser = (List<User>) repository.findUserByUsernameAndPassword(username, password);
-		
 		if(foundUser.size() == 0)
 			return user;
 		User currentUser = foundUser.get(0);
