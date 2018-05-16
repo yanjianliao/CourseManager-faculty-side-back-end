@@ -7,13 +7,34 @@ function UserServiceClient() {
     this.updateUser = updateUser;
     this.register = register;
     this.login = login;
+    this.profile = profile;
+    this.updateProfile = updateProfile;
+    this.logout = logout;
 
     var self = this;
-    this.url = 'http://localhost:8080/api/user';
-    this.loginUrl = 'http://localhost:8080/api/login';
-    this.registerUrl = 'http://localhost:8080/api/register';
+    this.url = 'https://first-yanjianliao.herokuapp.com/api/user';
+    this.loginUrl = 'https://first-yanjianliao.herokuapp.com/api/login';
+    this.registerUrl = 'https://first-yanjianliao.herokuapp.com/api/register';
+    this.profileUrl = 'https://first-yanjianliao.herokuapp.com/api/profile';
 
 
+    function logout() {
+
+    }
+
+
+    function updateProfile() {
+        return fetch(self.profileUrl)
+    }
+
+
+    function profile() {
+        return fetch(self.profileUrl)
+            .then(function (response) {
+                console.log(response);
+            return response.json();
+        });
+    }
 
     function login(user) {
         return fetch(self.loginUrl, {

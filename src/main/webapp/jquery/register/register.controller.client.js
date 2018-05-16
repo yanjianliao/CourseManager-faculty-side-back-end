@@ -19,8 +19,8 @@
         var password = $passwordFld.val();
 
         var newUser = new User(username, password,
-            'firstName', 'lastName', 'default@default.com',
-            '123456', 'role', '1990-01-01');
+            '', '', '',
+            '', '', '1990-01-01');
 
         userService.register(newUser).then(printOut);
     }

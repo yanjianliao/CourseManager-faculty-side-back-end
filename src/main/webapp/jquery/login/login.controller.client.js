@@ -2,6 +2,7 @@
     var $usernameFld, $passwordFld;
     var $loginBtn;
     var userService = new UserServiceClient();
+    var get;
     $(main);
 
     function main() {
@@ -9,6 +10,17 @@
         $passwordFld = $('#password');
         $loginBtn = $('#loginBtn');
         $loginBtn.click(login);
+        get = $('#get');
+        get.click(test);
+        document.cookie = '123';
+    }
+
+    function test() {
+        userService.get().then(after);
+    }
+
+    function after(user) {
+        console.log(user);
     }
 
     function login() {
@@ -28,19 +40,20 @@
         }
 
         var newUser = new User(username, password,
-            'firstName', 'lastName', 'default@default.com',
-            '123456', 'role', '1990-01-01');
+            '', '', '',
+            '', '', '');
 
         userService.login(newUser).then(afterLogin);
     }
 
     function afterLogin(user) {
-        if(user.role === 'role'){
+        if(user.role === ''){
             alert('Invalid username or password!');
             return;
         }
-
-        window.location.href = "http://localhost:8080/jquery/profile/profile.template.client.html";
+        alert('logedIn');
+        console.log(user);
+        window.location.href = "../profile/profile.template.client.html";
 
     }
 

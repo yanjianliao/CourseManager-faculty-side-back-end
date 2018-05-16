@@ -20,8 +20,10 @@ import com.example.webfirstassignment.repositories.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository repository;
-	
 
+	User temp = null;
+	
+	
 	//both /api/user and /api/user/?username=... will work
 	@GetMapping("/api/user")
 	public List<User> findAllUsers(@RequestParam(name="username", required=false) String username) {
@@ -45,29 +47,44 @@ public class UserService {
 		return (List<User>)repository.findUserByUsername(username);
 	}
 	
+	@GetMapping("/api/profile")
+	public User profile(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		System.out.println("profile : " + (user == null) + " session id: " + session.getId());
+		user = temp;
+		System.out.println(user.getId());
+		return user;
+	}
+		
 	@PostMapping("/api/login")
-	public User Login(@RequestBody User user, HttpSession session) {
+	public User login(@RequestBody User user, HttpSession session) {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		List<User> foundUser = (List<User>) repository.findUserByUsernameAndPassword(username, password);
 		if(foundUser.size() == 0)
 			return user;
 		User currentUser = foundUser.get(0);
-		session.setAttribute("currentUser", currentUser);
+		session.setAttribute("user", currentUser);
+		temp = currentUser;
+//		User u = (User) session.getAttribute("user");
+		System.out.println("login : " + temp.getId() + " session id: " + session.getId());
 		return currentUser;
 	}
 	
-	
+	@PostMapping("/api/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
 	
 	@PostMapping("/api/register")
 	public User register(@RequestBody User user, HttpSession session) {
 		String username = user.getUsername();
 		List<User> foundUser = (List<User>)repository.findUserByUsername(username);
-		if(foundUser.size() == 0)
+		if(foundUser.size() > 0)
 			return user;
-		User currentUser = foundUser.get(0);
-		session.setAttribute("currentUser", currentUser);
-		return currentUser;
+		session.setAttribute("user", user);
+		repository.save(user);
+		return user;
 	}	
 	
 	
