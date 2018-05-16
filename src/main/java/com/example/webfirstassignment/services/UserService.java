@@ -1,6 +1,8 @@
 package com.example.webfirstassignment.services;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,11 +45,30 @@ public class UserService {
 		return (List<User>)repository.findUserByUsername(username);
 	}
 	
+	@PostMapping("/api/login")
+	public User Login(@RequestBody User user, HttpSession session) {
+		String username = user.getUsername();
+		String password = user.getPassword();
+		List<User> foundUser = (List<User>) repository.findUserByUsernameAndPassword(username, password);
+		
+		if(foundUser.size() == 0)
+			return user;
+		User currentUser = foundUser.get(0);
+		session.setAttribute("currentUser", currentUser);
+		return currentUser;
+	}
+	
+	
+	
 	@PostMapping("/api/register")
-	public List<User> register(@RequestBody User user) {
+	public User register(@RequestBody User user, HttpSession session) {
 		String username = user.getUsername();
 		List<User> foundUser = (List<User>)repository.findUserByUsername(username);
-		return foundUser;
+		if(foundUser.size() == 0)
+			return user;
+		User currentUser = foundUser.get(0);
+		session.setAttribute("currentUser", currentUser);
+		return currentUser;
 	}	
 	
 	
