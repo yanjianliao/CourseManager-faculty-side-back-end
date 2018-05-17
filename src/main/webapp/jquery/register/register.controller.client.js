@@ -16,19 +16,43 @@
 
     function register() {
         var username = $usernameFld.val();
+        if(username === '') {
+            alert('The username can\'t be empty');
+            return ;
+        }
+
         var password = $passwordFld.val();
+        if(password === '') {
+            alert('The password can\'t be empty');
+            return ;
+        }
+        var verify = $verifyPasswordFld.val();
+
+        if(verify === '') {
+            alert('The verify password can\'t be empty');
+            return ;
+         }
+
+         if(verify !== password) {
+            alert('The two password must be same');
+            return ;
+         }
 
         var newUser = new User(username, password,
             '', '', '',
             '', '', '1990-01-01');
 
-        userService.register(newUser).then(printOut);
+        userService.register(newUser).then(afterRegister);
     }
 
-    function printOut(users){
-        console.log(users.length);
-        console.log(users);
-        console.log(users[0]);
+    function afterRegister(user) {
+        if(user.role === 'invalid'){
+            alert('This username is already taken, please try another one!')
+            return;
+        }
+
+        window.location.href = '../profile/profile.template.client.html';
     }
+
 
 })();

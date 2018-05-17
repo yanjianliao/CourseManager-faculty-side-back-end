@@ -58,8 +58,10 @@ public class UserService {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		List<User> foundUser = (List<User>) repository.findUserByUsernameAndPassword(username, password);
-		if(foundUser.size() == 0)
+		if(foundUser.size() == 0) {
+			user.setRole("invalid");
 			return user;
+		}
 		User currentUser = foundUser.get(0);
 		session.setAttribute("user", currentUser);
 		return currentUser;
@@ -76,8 +78,10 @@ public class UserService {
 	public User register(@RequestBody User user, HttpSession session) {
 		String username = user.getUsername();
 		List<User> foundUser = (List<User>)repository.findUserByUsername(username);
-		if(foundUser.size() > 0)
+		if(foundUser.size() > 0) {
+			user.setRole("invalid");
 			return user;
+		}
 		session.setAttribute("user", user);
 		repository.save(user);
 		return user;

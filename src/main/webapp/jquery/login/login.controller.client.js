@@ -47,10 +47,11 @@
     }
 
     function afterLogin(user) {
-        if(user.role === ''){
+        if(user.role === 'invalid'){
             alert('Invalid username or password!');
             return;
         }
+
         window.location.href = "../profile/profile.template.client.html";
 
     }
