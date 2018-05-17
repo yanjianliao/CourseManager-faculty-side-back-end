@@ -68,7 +68,8 @@
         }
 
         if(user.dateOfBirth != null) {
-            $dateOfBirth.val(user.dateOfBirth);
+            var date = user.dateOfBirth.split('T');
+            $dateOfBirth.val(date[0]);
         }
 
     }

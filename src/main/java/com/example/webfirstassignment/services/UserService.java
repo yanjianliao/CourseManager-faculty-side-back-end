@@ -62,8 +62,6 @@ public class UserService {
 			return user;
 		User currentUser = foundUser.get(0);
 		session.setAttribute("user", currentUser);
-
-
 		return currentUser;
 	}
 	
@@ -83,17 +81,21 @@ public class UserService {
 		return user;
 	}	
 	
-//	@PutMapping("/api/profile")
-//	public User updateProfile(@RequestBody User user, HttpSession session) {
-//		if(temp != null) {
-//			user.setId(temp.getId());
-//			System.out.println(user.getDataOfBirth());
-//			repository.save(user);
-//			return user;
-//		}else {
-//			return null;
-//		}
-//	}
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User user, HttpSession session) {
+		User currentUser = (User)session.getAttribute("user");
+		
+		if(currentUser != null) {
+			currentUser.setDateOfBirth(user.getDateOfBirth());
+			currentUser.setEmail(user.getEmail());
+			currentUser.setPhone(user.getPhone());
+			currentUser.setRole(user.getRole());
+			repository.save(currentUser);
+			return currentUser;
+		}
+		
+		return null;
+	}
 	
 	
 	@PutMapping("/api/user/{userId}")

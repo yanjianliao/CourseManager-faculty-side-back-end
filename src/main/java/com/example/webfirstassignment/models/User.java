@@ -15,7 +15,7 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private Date DateOfBirth;
+	private Date dateOfBirth;
 	private String role;
 	private String email;
 	private String phone;
@@ -30,7 +30,7 @@ public class User {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.DateOfBirth = date;
+		this.setDateOfBirth(date);
 		this.role = role;
 		this.email = email;
 		this.phone = phone;
@@ -66,12 +66,6 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Date getDataOfBirth() {
-		return DateOfBirth;
-	}
-	public void setDataOfBirth(Date dataOfBirth) {
-		DateOfBirth = dataOfBirth;
-	}
 	public String getRole() {
 		return role;
 	}
@@ -89,6 +83,14 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	
 }

@@ -9,7 +9,7 @@ function UserServiceClient() {
     this.login = login;
     this.profile = profile;
     this.updateProfile = updateProfile;
-    this.logout = logout;
+    // this.logout = logout;
 
     var self = this;
     this.url = 'http://localhost:8080/api/user';
@@ -27,6 +27,7 @@ function UserServiceClient() {
         return fetch(self.profileUrl, {
             method: 'put',
             body: JSON.stringify(user),
+            credentials: 'same-origin',
             headers: {
                 'content-type' : 'application/json'
             }
@@ -37,7 +38,9 @@ function UserServiceClient() {
 
 
     function profile() {
-        return fetch(self.profileUrl)
+        return fetch(self.profileUrl, {
+            credentials: 'same-origin'
+        })
             .then(function (response) {
                 console.log(response);
             return response.json();
@@ -48,6 +51,7 @@ function UserServiceClient() {
         return fetch(self.loginUrl, {
             method: 'post',
             body: JSON.stringify(user),
+            credentials: 'same-origin',
             headers: {
                 'content-type' : 'application/json'
             }

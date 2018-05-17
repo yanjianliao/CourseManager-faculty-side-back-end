@@ -35,7 +35,7 @@
 
 
         if(password === ''){
-            alert('Empty password!')
+            alert('Empty password!');
             return;
         }
 
