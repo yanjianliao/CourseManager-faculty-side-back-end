@@ -17,7 +17,7 @@
         $dateOfBirth = $('#dateOfBirth');
 
         $updateBtn = $('#updateBtn');
-        $logoutBtn = $('#loginBtn');
+        $logoutBtn = $('#logoutBtn');
         $updateBtn.click(updateProfile);
         $logoutBtn.click(logout);
         showProfile();
@@ -32,6 +32,7 @@
             user.firstName, user.lastName, $email.val(),
             $phone.val(), $role.val(), $dateOfBirth.val().toString());
 
+
         userService.updateProfile(newUser).then(afterUpdate);
 
     }
@@ -41,7 +42,14 @@
     }
 
     function logout() {
+        userService.logout().then(afterLogout);
+    }
 
+
+
+
+    function afterLogout() {
+        window.location.href = "../login/login.template.client.html";
     }
 
     function showProfile() {
@@ -73,6 +81,5 @@
         }
 
     }
-
 
 })();

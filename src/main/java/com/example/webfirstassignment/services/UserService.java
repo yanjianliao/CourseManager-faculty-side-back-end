@@ -66,8 +66,10 @@ public class UserService {
 	}
 	
 	@PostMapping("/api/logout")
-	public void logout(HttpSession session) {
+	public User logout(HttpSession session) {
+		User user = (User)session.getAttribute("user");
 		session.invalidate();
+		return user;
 	}
 	
 	@PostMapping("/api/register")
@@ -111,6 +113,8 @@ public class UserService {
 			repository.save(newUser);
 			return newUser;
 		}
+		
+		
 		return null;
 	}
 	

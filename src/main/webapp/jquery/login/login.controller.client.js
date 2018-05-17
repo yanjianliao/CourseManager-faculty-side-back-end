@@ -51,8 +51,6 @@
             alert('Invalid username or password!');
             return;
         }
-        alert('logedIn');
-        console.log(user);
         window.location.href = "../profile/profile.template.client.html";
 
     }
