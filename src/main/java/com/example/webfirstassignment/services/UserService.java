@@ -21,8 +21,6 @@ public class UserService {
 	@Autowired
 	UserRepository repository;
 
-	
-	
 	//both /api/user and /api/user/?username=... will work
 	@GetMapping("/api/user")
 	public List<User> findAllUsers(@RequestParam(name="username", required=false) String username) {
@@ -90,7 +88,6 @@ public class UserService {
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user, HttpSession session) {
 		User currentUser = (User)session.getAttribute("user");
-		
 		if(currentUser != null) {
 			currentUser.setDateOfBirth(user.getDateOfBirth());
 			currentUser.setEmail(user.getEmail());
@@ -99,10 +96,8 @@ public class UserService {
 			repository.save(currentUser);
 			return currentUser;
 		}
-		
 		return null;
 	}
-	
 	
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable("userId") int id, @RequestBody User user) {
@@ -117,8 +112,6 @@ public class UserService {
 			repository.save(newUser);
 			return newUser;
 		}
-		
-		
 		return null;
 	}
 	
