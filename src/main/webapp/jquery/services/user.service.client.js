@@ -45,9 +45,8 @@ function UserServiceClient() {
             credentials: 'same-origin'
         })
             .then(function (response) {
-                console.log(response);
-            return response.json();
-        });
+                return response.json();
+            });
     }
 
     function login(user) {

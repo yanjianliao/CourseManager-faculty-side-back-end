@@ -27,17 +27,27 @@
     function updateProfile() {
         //username, password, firstName, lastName,
         // email, phone, role, dateOfBirth
+        if(!currentUser){
+            alert('You can\'t update now, Please login first');
+            return;
+        }
+
+
         var user = currentUser;
         var newUser = new User(user.username, user.password,
             user.firstName, user.lastName, $email.val(),
             $phone.val(), $role.val(), $dateOfBirth.val().toString());
-
 
         userService.updateProfile(newUser).then(afterUpdate);
 
     }
 
     function afterUpdate(user) {
+        if(user === null){
+            alert('You can\'t update now, please login first!');
+            return;
+        }
+        alert('Update success!!');
         console.log(user);
     }
 
