@@ -12,11 +12,11 @@ function UserServiceClient() {
     this.logout = logout;
 
     var self = this;
-    this.url = 'http://localhost:8080/api/user';
-    this.loginUrl = 'http://localhost:8080/api/login';
-    this.registerUrl = 'http://localhost:8080/api/register';
-    this.profileUrl = 'http://localhost:8080/api/profile';
-    this.logoutUrl = 'http://localhost:8080/api/logout';
+    this.url = '/api/user';
+    this.loginUrl = '/api/login';
+    this.registerUrl = '/api/register';
+    this.profileUrl = '/api/profile';
+    this.logoutUrl = '/api/logout';
 
     function logout() {
         return fetch(self.logoutUrl, {
