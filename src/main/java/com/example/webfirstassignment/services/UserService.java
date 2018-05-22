@@ -47,7 +47,7 @@ public class UserService {
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		System.out.println("profile : " + (user == null));
+//		System.out.println("profile : " + (user == null));
 		return user;
 	}
 		

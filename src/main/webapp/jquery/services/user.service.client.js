@@ -99,7 +99,6 @@ function UserServiceClient() {
         });
     }
 
-
     function createUser(user) {
         return fetch(self.url, {
             method: 'post',
@@ -111,7 +110,6 @@ function UserServiceClient() {
             return response.json();
         });
     }
-
 
 
     function findAllUsers() {
