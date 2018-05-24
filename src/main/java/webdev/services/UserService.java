@@ -1,4 +1,4 @@
-package com.example.webfirstassignment.services;
+package webdev.services;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.webfirstassignment.models.User;
-import com.example.webfirstassignment.repositories.UserRepository;
+import webdev.models.User;
+import webdev.repositories.UserRepository;
 
 @RestController
 public class UserService {
@@ -81,7 +81,7 @@ public class UserService {
 			return user;
 		}
 		session.setAttribute("user", user);
-		repository.save(user);
+		createUser(user);
 		return user;
 	}	
 	

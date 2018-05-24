@@ -1,4 +1,4 @@
-package com.example.webfirstassignment.models;
+package webdev.models;
 import java.util.Date;
 
 import javax.persistence.Entity;

@@ -4,8 +4,8 @@
     var $removeBtn, $editBtn, $createBtn, $updateBtn;
     var $firstNameFld, $lastNameFld, $roleFld;
     var $userRowTemplate, $tbody;
-    var currentUser;
-    var currentId;
+    var currentUser = null;
+    var currentId = 0;
     var userService = new UserServiceClient();
     $(main);
 
@@ -74,6 +74,11 @@
     }
 
     function updateUser() {
+        if(currentUser === null){
+            alert('Please Select a User');
+            return;
+        }
+
         var username = $usernameFld.val();
         var password = $passwordFld.val();
         var firstName = $firstNameFld.val();
@@ -95,6 +100,7 @@
         $firstNameFld.val(user.firstName);
         $lastNameFld.val(user.lastName);
         $roleFld.val(user.role);
+
     }
 
     function renderUsers(users) {

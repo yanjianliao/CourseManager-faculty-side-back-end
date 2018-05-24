@@ -47,7 +47,7 @@
 
     function afterRegister(user) {
         if(user.role === 'invalid'){
-            alert('Register failed. This username is already taken, please try another one!')
+            alert('Register failed. This username is already taken, please try another one!');
             return;
         }
 
