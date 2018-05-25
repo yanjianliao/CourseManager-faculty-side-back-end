@@ -1,8 +1,7 @@
 (function () {
 
-
     var $phone , $email, $role, $dateOfBirth, $username;
-    var $updateBtn, $logoutBtn;
+    var $updateBtn, $logoutBtn, $notification;
     var userService = new UserServiceClient();
     var currentUser;
 
@@ -16,6 +15,7 @@
         $username = $('#usernameInvalid');
         $dateOfBirth = $('#dateOfBirth');
 
+        $notification = $('#notification');
         $updateBtn = $('#updateBtn');
         $logoutBtn = $('#logoutBtn');
         $updateBtn.click(updateProfile);
@@ -52,6 +52,7 @@
     }
 
     function logout() {
+        currentUser = null;
         userService.logout().then(afterLogout);
     }
 
@@ -59,7 +60,8 @@
 
 
     function afterLogout() {
-        window.location.href = "../login/login.template.client.html";
+        $notification.css('display', 'block');
+        // window.location.href = "../login/login.template.client.html";
     }
 
     function showProfile() {

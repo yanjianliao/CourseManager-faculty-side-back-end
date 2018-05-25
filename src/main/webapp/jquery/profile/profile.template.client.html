@@ -18,9 +18,9 @@
             src="../models/user.model.client.js"
     ></script>
     <script
-            src="profile.controller.client.js/?version=7"
+            src="profile.controller.client.js/?version=9"
     ></script>
-    <link rel="stylesheet" href="profile.style.client.css">
+    <link rel="stylesheet" href="profile.style.client.css/?version=1">
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -34,6 +34,9 @@
 <div class="container">
     <h1>Profile</h1>
     <hr>
+    <div class="alert alert-success" role="alert" id="notification">
+        Logged Out Successfully!!!!
+    </div>
     <form>
         <div class="form-group row">
             <label for="usernameInvalid" class="col-sm-2 col-form-label">
