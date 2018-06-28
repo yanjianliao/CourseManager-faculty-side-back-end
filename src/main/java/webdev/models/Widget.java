@@ -1,14 +1,21 @@
 package webdev.models;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//@org.hibernate.annotations.DiscriminatorOptions(force=true)
+//@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "TYPE")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Widget {
 
 	@Id
