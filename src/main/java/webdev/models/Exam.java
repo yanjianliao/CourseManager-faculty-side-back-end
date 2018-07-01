@@ -2,6 +2,7 @@ package webdev.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -11,7 +12,7 @@ public class Exam extends Widget{
 	private String title;
 	private String description;
 	private String points;
-	@OneToMany(mappedBy="exam")
+	@OneToMany(mappedBy="exam", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<BaseExamQuestion> baseExamQuestions;
 	
 	public String getTitle() {

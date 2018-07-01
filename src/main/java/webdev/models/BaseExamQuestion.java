@@ -4,18 +4,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class BaseExamQuestion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String title;
 	private String subtitle;
+	private String points;
 	private String type;
+	@ManyToOne
+	@JsonIgnore
+	private Exam exam;
+	
+	public String getPoints() {
+		return points;
+	}
+
+	public void setPoints(String points) {
+		this.points = points;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -47,10 +63,6 @@ public class BaseExamQuestion {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	@ManyToOne
-	@JsonIgnore
-	private Exam exam;
 
 	public Exam getExam() {
 		return exam;
