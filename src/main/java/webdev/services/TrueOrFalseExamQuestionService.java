@@ -15,45 +15,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.models.BaseExamQuestion;
-import webdev.models.EssayExamQuestion;
 import webdev.models.Exam;
-import webdev.models.MultipleChoiceExamQuestion;
-import webdev.repositories.BaseExamQuestionRepository;
-import webdev.repositories.EssayExamQuestionRepository;
+import webdev.models.TrueOrFalseExamQuestion;
 import webdev.repositories.ExamRepository;
+import webdev.repositories.TrueOrFalseExamQuestionRepository;
 
 @RestController
-@CrossOrigin(origins = "*", maxAge = 3600)
-public class EssayExamQuestionService {
-	
+@CrossOrigin(origins = "*")
+public class TrueOrFalseExamQuestionService {
+
 	@Autowired
-	EssayExamQuestionRepository repository;
+	TrueOrFalseExamQuestionRepository repository;
 	
 	@Autowired
 	ExamRepository examRepository;
 	
-	@GetMapping("/api/essay")
-	public List<EssayExamQuestion> findAllMultipleChoiceExamQuestions() {
-		return (List<EssayExamQuestion>) repository.findAll();
+	
+	@GetMapping("/api/truefalse")
+	public List<TrueOrFalseExamQuestion> findAllQuestions() {
+		return (List<TrueOrFalseExamQuestion>) repository.findAll();
 	}
 	
-	@GetMapping("/api/exam/{eId}/essay")
-	public List<EssayExamQuestion> findEssayExamQuestionForExam(@PathVariable("eId") int id) {
+	@GetMapping("/api/exam/{eId}/truefalse")
+	public List<TrueOrFalseExamQuestion> findEssayExamQuestionForExam(@PathVariable("eId") int id) {
 		Optional<Exam> data = examRepository.findById(id);
-		List<EssayExamQuestion> list = new ArrayList<>();
+		List<TrueOrFalseExamQuestion> list = new ArrayList<>();
 		if(data.isPresent()) {
 			Exam exam = data.get();
 			for(BaseExamQuestion q : exam.getBaseExamQuestions()) {
-				if(q instanceof EssayExamQuestion) {
-					list.add((EssayExamQuestion) q);
+				if(q instanceof TrueOrFalseExamQuestion) {
+					list.add((TrueOrFalseExamQuestion) q);
 				}
 			}
 		}
 		return list;
 	}
 	
-	@PostMapping("/api/exam/{eId}/essay")
-	public EssayExamQuestion createForExam(@PathVariable("eId") int id, @RequestBody EssayExamQuestion question) {
+	@PostMapping("/api/exam/{eId}/truefalse")
+	public TrueOrFalseExamQuestion createForExam(@PathVariable("eId") int id, @RequestBody TrueOrFalseExamQuestion question) {
 		Optional<Exam> data = examRepository.findById(id);
 		if(data.isPresent()) {
 			Exam exam = data.get();
@@ -63,23 +62,25 @@ public class EssayExamQuestionService {
 		return question;
 	}
 	
-	@PutMapping("/api/essay/{eId}")
-	public EssayExamQuestion updateById(@PathVariable("eId") int id, @RequestBody EssayExamQuestion question) {
-		Optional<EssayExamQuestion> data = repository.findById(id);
+	@PutMapping("/api/truefalse/{eId}")
+	public TrueOrFalseExamQuestion updateById(@PathVariable("eId") int id, @RequestBody TrueOrFalseExamQuestion question) {
+		Optional<TrueOrFalseExamQuestion> data = repository.findById(id);
 		if(data.isPresent()) {
-			EssayExamQuestion old = data.get();
+			TrueOrFalseExamQuestion old = data.get();
 			old.setTitle(question.getTitle());
 			old.setDescription(question.getDescription());
 			old.setPoints(question.getPoints());
 			old.setSubtitle(question.getSubtitle());
+			old.setTrueOrFlase(question.getTrueOrFlase());
 			repository.save(old);
 		}
 		return question;
 	}
 	
 	
-	@DeleteMapping("/api/essay/{cId}")
+	@DeleteMapping("/api/truefalse/{cId}")
 	public void deleteById(@PathVariable("cId") int id) {
 		repository.deleteById(id);
 	}
+	
 }

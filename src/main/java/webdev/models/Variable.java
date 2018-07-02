@@ -9,37 +9,40 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Choice {
-
+public class Variable {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
-
 	@JsonIgnore
 	@ManyToOne
-	private MultipleChoiceExamQuestion question;
+	FillInTheBlanksExamQuestion question;
 	
-	public MultipleChoiceExamQuestion getQuestion() {
-		return question;
-	}
-	public void setQuestion(MultipleChoiceExamQuestion question) {
-		this.question = question;
-	}
+	String variable;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+
+	public FillInTheBlanksExamQuestion getQuestion() {
+		return question;
 	}
 
-	
+	public void setQuestion(FillInTheBlanksExamQuestion question) {
+		this.question = question;
+	}
+
+	public String getVariable() {
+		return variable;
+	}
+
+	public void setVariable(String variable) {
+		this.variable = variable;
+	}
 	
 	
 }
