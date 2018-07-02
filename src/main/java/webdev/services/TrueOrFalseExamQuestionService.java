@@ -71,7 +71,7 @@ public class TrueOrFalseExamQuestionService {
 			old.setDescription(question.getDescription());
 			old.setPoints(question.getPoints());
 			old.setSubtitle(question.getSubtitle());
-			old.setTrueOrFlase(question.getTrueOrFlase());
+			old.setTrueOrFalse(question.getTrueOrFalse());
 			repository.save(old);
 		}
 		return question;

@@ -5,15 +5,16 @@ import javax.persistence.Entity;
 @Entity
 public class TrueOrFalseExamQuestion extends BaseExamQuestion{
 
-	private String trueOrFlase;
+	private String trueOrFalse;
+
 	private String description;
-	
-	public String getTrueOrFlase() {
-		return trueOrFlase;
+	public String getTrueOrFalse() {
+		return trueOrFalse;
 	}
-	public void setTrueOrFlase(String trueOrFlase) {
-		this.trueOrFlase = trueOrFlase;
+	public void setTrueOrFalse(String trueOrFalse) {
+		this.trueOrFalse = trueOrFalse;
 	}
+
 	public String getDescription() {
 		return description;
 	}
