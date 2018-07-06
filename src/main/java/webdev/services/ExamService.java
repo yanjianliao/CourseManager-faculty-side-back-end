@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,6 +59,21 @@ public class ExamService {
 		}
 		return list;
 	}
+	
+	@PutMapping("/api/exam/{examId}")
+	public Exam updateExamById(@PathVariable("examId") int id, @RequestBody Exam exam) {
+		Optional<Exam> data = repository.findById(id);
+		if(data.isPresent()) {
+			Exam old = data.get();
+			old.setTitle(exam.getTitle());
+			old.setDescription(exam.getDescription());
+			old.setPoints(exam.getPoints());
+			repository.save(old);
+		}
+		
+		return exam;
+	}
+	
 	
 	@PostMapping("/api/topic/{topicId}/exam")
 	public Exam createExamForTopic(@PathVariable("topicId") int id, @RequestBody Exam exam) {
